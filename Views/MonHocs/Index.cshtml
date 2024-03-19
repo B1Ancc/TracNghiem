@@ -1,22 +1,25 @@
-﻿@model IEnumerable<TracNghiem.Models.Khois>
+﻿@model IEnumerable<TracNghiem.Models.MonHoc>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-info">Index</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Tạo mới", "Create", new { controller = "Khois" }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            Tên khối/tên lớp
+            Tên môn học
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Meta)
+        </th>
+        <th>
+            Tên khối/tên lớp
         </th>
         <th></th>
     </tr>
@@ -24,10 +27,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.TenKhoi)
+            Tên môn học
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Meta)
+        </td>
+        <td>
+            Tên khối/tên lớp
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |

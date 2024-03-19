@@ -12,29 +12,18 @@ namespace TracNghiem.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CauHois
+    public partial class DapAn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CauHois()
+        public DapAn()
         {
-            this.KetQuas = new HashSet<KetQua>();
+            this.CauHois = new HashSet<CauHois>();
         }
     
-        public long Id { get; set; }
-        public string Cauhoi { get; set; }
-        public string dap_an_a { get; set; }
-        public string dap_an_b { get; set; }
-        public string dap_an_c { get; set; }
-        public string dap_an_d { get; set; }
-        public Nullable<int> MaDapAn { get; set; }
-        public string ghi_chu { get; set; }
-        public Nullable<int> MaMonHoc { get; set; }
-        public Nullable<int> MaMucDo { get; set; }
+        public int id { get; set; }
+        public string DapAn1 { get; set; }
     
-        public virtual DapAn DapAn { get; set; }
-        public virtual MonHoc MonHoc { get; set; }
-        public virtual MucDoKho MucDoKho { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KetQua> KetQuas { get; set; }
+        public virtual ICollection<CauHois> CauHois { get; set; }
     }
 }

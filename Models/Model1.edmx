@@ -15,10 +15,17 @@
           <Property Name="dap_an_b" Type="nvarchar" MaxLength="250" />
           <Property Name="dap_an_c" Type="nvarchar" MaxLength="250" />
           <Property Name="dap_an_d" Type="nvarchar" MaxLength="250" />
-          <Property Name="dap_an" Type="nchar" MaxLength="1" />
+          <Property Name="MaDapAn" Type="int" />
           <Property Name="ghi_chu" Type="nvarchar" MaxLength="250" />
           <Property Name="MaMonHoc" Type="int" />
           <Property Name="MaMucDo" Type="int" />
+        </EntityType>
+        <EntityType Name="DapAns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DapAn" Type="nchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="DeThis">
           <Key>
@@ -75,6 +82,18 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
           <Property Name="LaAdmin" Type="tinyint" />
         </EntityType>
+        <Association Name="FK_CauHois_DapAns">
+          <End Role="DapAns" Type="Self.DapAns" Multiplicity="0..1" />
+          <End Role="CauHois" Type="Self.CauHois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DapAns">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CauHois">
+              <PropertyRef Name="MaDapAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CauHois_MonHocs">
           <End Role="MonHocs" Type="Self.MonHocs" Multiplicity="0..1" />
           <End Role="CauHois" Type="Self.CauHois" Multiplicity="*" />
@@ -149,12 +168,17 @@
         </Association>
         <EntityContainer Name="tracnghiemModelStoreContainer">
           <EntitySet Name="CauHois" EntityType="Self.CauHois" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DapAns" EntityType="Self.DapAns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeThis" EntityType="Self.DeThis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KetQuas" EntityType="Self.KetQuas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Khois" EntityType="Self.Khois" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonHocs" EntityType="Self.MonHocs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MucDoKhos" EntityType="Self.MucDoKhos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThanhViens" EntityType="Self.ThanhViens" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CauHois_DapAns" Association="Self.FK_CauHois_DapAns">
+            <End Role="DapAns" EntitySet="DapAns" />
+            <End Role="CauHois" EntitySet="CauHois" />
+          </AssociationSet>
           <AssociationSet Name="FK_CauHois_MonHocs" Association="Self.FK_CauHois_MonHocs">
             <End Role="MonHocs" EntitySet="MonHocs" />
             <End Role="CauHois" EntitySet="CauHois" />
@@ -195,13 +219,22 @@
           <Property Name="dap_an_b" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="dap_an_c" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="dap_an_d" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="dap_an" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MaDapAn" Type="Int32" />
           <Property Name="ghi_chu" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="MaMonHoc" Type="Int32" />
           <Property Name="MaMucDo" Type="Int32" />
+          <NavigationProperty Name="DapAn" Relationship="Self.FK_CauHois_DapAns" FromRole="CauHois" ToRole="DapAns" />
           <NavigationProperty Name="MonHoc" Relationship="Self.FK_CauHois_MonHocs" FromRole="CauHois" ToRole="MonHocs" />
           <NavigationProperty Name="MucDoKho" Relationship="Self.FK_CauHois_MucDoKhos" FromRole="CauHois" ToRole="MucDoKhos" />
           <NavigationProperty Name="KetQuas" Relationship="Self.FK_KetQuas_CauHois" FromRole="CauHois" ToRole="KetQuas" />
+        </EntityType>
+        <EntityType Name="DapAn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DapAn1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CauHois" Relationship="Self.FK_CauHois_DapAns" FromRole="DapAns" ToRole="CauHois" />
         </EntityType>
         <EntityType Name="DeThi">
           <Key>
@@ -267,6 +300,18 @@
           <Property Name="LaAdmin" Type="Byte" />
           <NavigationProperty Name="KetQuas" Relationship="Self.FK_KetQuas_ThanhViens" FromRole="ThanhViens" ToRole="KetQuas" />
         </EntityType>
+        <Association Name="FK_CauHois_DapAns">
+          <End Role="DapAns" Type="Self.DapAn" Multiplicity="0..1" />
+          <End Role="CauHois" Type="Self.CauHois" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DapAns">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CauHois">
+              <PropertyRef Name="MaDapAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CauHois_MonHocs">
           <End Role="MonHocs" Type="Self.MonHoc" Multiplicity="0..1" />
           <End Role="CauHois" Type="Self.CauHois" Multiplicity="*" />
@@ -341,12 +386,17 @@
         </Association>
         <EntityContainer Name="tracnghiemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CauHois" EntityType="Self.CauHois" />
+          <EntitySet Name="DapAns" EntityType="Self.DapAn" />
           <EntitySet Name="DeThis" EntityType="Self.DeThi" />
           <EntitySet Name="KetQuas" EntityType="Self.KetQua" />
           <EntitySet Name="Khois" EntityType="Self.Khois" />
           <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
           <EntitySet Name="MucDoKhos" EntityType="Self.MucDoKho" />
           <EntitySet Name="ThanhViens" EntityType="Self.ThanhVien" />
+          <AssociationSet Name="FK_CauHois_DapAns" Association="Self.FK_CauHois_DapAns">
+            <End Role="DapAns" EntitySet="DapAns" />
+            <End Role="CauHois" EntitySet="CauHois" />
+          </AssociationSet>
           <AssociationSet Name="FK_CauHois_MonHocs" Association="Self.FK_CauHois_MonHocs">
             <End Role="MonHocs" EntitySet="MonHocs" />
             <End Role="CauHois" EntitySet="CauHois" />
@@ -387,10 +437,18 @@
                 <ScalarProperty Name="dap_an_b" ColumnName="dap_an_b" />
                 <ScalarProperty Name="dap_an_c" ColumnName="dap_an_c" />
                 <ScalarProperty Name="dap_an_d" ColumnName="dap_an_d" />
-                <ScalarProperty Name="dap_an" ColumnName="dap_an" />
+                <ScalarProperty Name="MaDapAn" ColumnName="MaDapAn" />
                 <ScalarProperty Name="ghi_chu" ColumnName="ghi_chu" />
                 <ScalarProperty Name="MaMonHoc" ColumnName="MaMonHoc" />
                 <ScalarProperty Name="MaMucDo" ColumnName="MaMucDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DapAns">
+            <EntityTypeMapping TypeName="tracnghiemModel.DapAn">
+              <MappingFragment StoreEntitySet="DapAns">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DapAn1" ColumnName="DapAn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

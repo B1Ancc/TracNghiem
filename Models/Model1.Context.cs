@@ -26,6 +26,7 @@ namespace TracNghiem.Models
         }
     
         public virtual DbSet<CauHois> CauHois { get; set; }
+        public virtual DbSet<DapAn> DapAns { get; set; }
         public virtual DbSet<DeThi> DeThis { get; set; }
         public virtual DbSet<KetQua> KetQuas { get; set; }
         public virtual DbSet<Khois> Khois { get; set; }
