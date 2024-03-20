@@ -1,18 +1,15 @@
 ﻿@model TracNghiem.Models.Khois
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Controller = "Khối/lớp";
+    ViewBag.Title = "Chi tiết khối/lớp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Khois</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TenKhoi)
+            Khối/lớp
         </dt>
 
         <dd>
@@ -20,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Meta)
+            Meta
         </dt>
 
         <dd>
@@ -30,6 +27,17 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit", "Khois", new {id = Model.id })" class="btn btn-warning" style="margin: 0px 5px;">
+        <i class="fas fa-edit"></i>
+        <span>
+            <strong>Cập nhật</strong>
+        </span>
+    </a>
+
+    <a href="@Url.Action("Index", "Khois")" class="btn btn-primary" style="margin: 0px 5px;">
+        <i class="fas fa-list"></i>
+        <span>
+            <strong>Danh sách</strong>
+        </span>
+    </a>
 </p>

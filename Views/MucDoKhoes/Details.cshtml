@@ -1,18 +1,15 @@
 ﻿@model TracNghiem.Models.MucDoKho
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Controller = "Mức độ";
+    ViewBag.Title = "Chi tiết mức độ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>MucDoKho</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TenMucDo)
+            Mức độ
         </dt>
 
         <dd>
@@ -22,6 +19,17 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Edit", "MucDoKhoes", new {id = Model.id })" class="btn btn-warning" style="margin: 0px 5px;">
+        <i class="fas fa-edit"></i>
+        <span>
+            <strong>Cập nhật</strong>
+        </span>
+    </a>    
+
+    <a href="@Url.Action("Index", "MucDoKhoes")" class="btn btn-primary" style="margin: 0px 5px;">
+        <i class="fas fa-list"></i>
+        <span>
+            <strong>Danh sách</strong>
+        </span>
+    </a>
 </p>

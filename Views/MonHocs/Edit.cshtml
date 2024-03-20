@@ -1,58 +1,62 @@
 ﻿@model TracNghiem.Models.MonHoc
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Controller = "Môn học";
+    ViewBag.Title = "Cập nhật thông tin môn học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>MonHoc</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+<div class="form-horizontal fw-bold">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TenMonHocs, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TenMonHocs, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TenMonHocs, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Meta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Meta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Meta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MaKhoi, "MaKhoi", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("MaKhoi", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.MaKhoi, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        Môn học
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenMonHocs, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenMonHocs, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        @Html.LabelFor(model => model.Meta, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Meta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Meta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        Khối/lớp
+        <div class="col-md-10">
+            @Html.DropDownList("MaKhoi", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MaKhoi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>
+            <button type="submit" class="btn btn-success" style="margin: 10px 5px 10px 0px;">
+                <i class="fas fa-save"></i>
+                <span>
+                    <strong>Lưu cập nhật</strong>
+                </span>
+            </button>
+
+            <a href="@Url.Action("Index", "MonHocs")" class="btn btn-primary" style="margin: 5px 5px;">
+                <i class="fas fa-list"></i>
+                <span>
+                    <strong>Danh sách</strong>
+                </span>
+            </a>
+        </div>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

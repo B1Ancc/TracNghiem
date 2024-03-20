@@ -1,23 +1,19 @@
 ﻿@model TracNghiem.Models.MucDoKho
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Controller = "Mức độ";
+    ViewBag.Title = "Tạo mức độ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>MucDoKho</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TenMucDo, htmlAttributes: new { @class = "control-label col-md-2" })
+            Mức độ
             <div class="col-md-10">
                 @Html.EditorFor(model => model.TenMucDo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TenMucDo, "", new { @class = "text-danger" })
@@ -25,16 +21,24 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div>
+                <button type="submit" class="btn btn-primary" style="margin: 10px 5px 10px 0px;">
+                    <i class="fas fa-plus"></i>
+                    <span>
+                        <strong>Thêm môn học</strong>
+                    </span>
+                </button>
+
+                <a href="@Url.Action("Index", "MucDoKhoes")" class="btn btn-primary" style="margin: 5px 5px;">
+                    <i class="fas fa-list"></i>
+                    <span>
+                        <strong>Danh sách</strong>
+                    </span>
+                </a>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
